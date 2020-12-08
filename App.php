@@ -38,10 +38,10 @@ class App {
      * @return mixed
      */
     private function createCollectionsFromData($model, $data) {
-        return array_reduce($data, function($collection, $user_data) use($model) {
-            $user = $model::fromData($user_data);
-            $collection['Data'][$user->getID()] = $user;
-            $collection['lastIdx'] = max($collection['lastIdx'], $user->getID());
+        return array_reduce($data, function($collection, $input_data) use($model) {
+            $input = $model::fromData($input_data);
+            $collection['Data'][$input->getID()] = $input;
+            $collection['lastIdx'] = max($collection['lastIdx'], $input->getID());
             $collection['nextIdx'] = $collection['lastIdx'] + 1;
             return $collection;
         }, []);
